@@ -26,8 +26,10 @@ const useAuthStore = create((set) => ({
   login: async (data) => {
     set({ loading: true, error: null });
     try {
-      const response = await api.post('/api/auth/login', credentials);
-      const { token, user } = res.data;
+      // FIX 1: Changed 'credentials' to 'data' to match the argument name
+      const response = await api.post('/auth/login', data);
+      // FIX 2: Changed 'res.data' to 'response.data' to match the variable name
+      const { token, user } = response.data;
       localStorage.setItem('rizq_token', token);
       localStorage.setItem('rizq_user', JSON.stringify(user));
       set({ user, token, loading: false });
