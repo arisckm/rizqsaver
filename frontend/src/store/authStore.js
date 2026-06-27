@@ -10,7 +10,8 @@ const useAuthStore = create((set) => ({
   register: async (data) => {
     set({ loading: true, error: null });
     try {
-      const res = await api.post('/auth/register', data);
+      // Updated with /api prefix
+      const res = await api.post('/api/auth/register', data);
       const { token, user } = res.data;
       localStorage.setItem('rizq_token', token);
       localStorage.setItem('rizq_user', JSON.stringify(user));
@@ -26,9 +27,8 @@ const useAuthStore = create((set) => ({
   login: async (data) => {
     set({ loading: true, error: null });
     try {
-      // FIX 1: Changed 'credentials' to 'data' to match the argument name
-      const response = await api.post('/auth/login', data);
-      // FIX 2: Changed 'res.data' to 'response.data' to match the variable name
+      // Updated with /api prefix
+      const response = await api.post('/api/auth/login', data);
       const { token, user } = response.data;
       localStorage.setItem('rizq_token', token);
       localStorage.setItem('rizq_user', JSON.stringify(user));
